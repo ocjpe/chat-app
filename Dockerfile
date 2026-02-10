@@ -14,11 +14,11 @@ COPY . .
 # Créer le répertoire data pour SQLite
 RUN mkdir -p data
 
-# Générer le client Prisma
+# Générer le client Prisma (ne nécessite pas de connexion DB)
 RUN npx prisma generate --schema=backend/prisma/schema.prisma
 
-# Appliquer le schéma à la base de données
-RUN npx prisma db push --schema=backend/prisma/schema.prisma
+# Fournir un DATABASE_URL temporaire pour le build Next.js
+ENV DATABASE_URL="file:../../data/app.db"
 
 # Construire l'application Next.js
 RUN npm run build
@@ -26,5 +26,5 @@ RUN npm run build
 # Exposer le port
 EXPOSE 3000
 
-# Lancer l'application
-CMD ["npm", "start"]
+# Au démarrage : appliquer le schéma à la DB puis lancer l'app
+CMD npx prisma db push --schema=backend/prisma/schema.prisma && npm start
