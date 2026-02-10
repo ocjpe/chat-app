@@ -1,0 +1,276 @@
+/* ═══════════════════════════════
+   MATRIX INTRO
+   ═══════════════════════════════ */
+.matrix-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #0D0D0D;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.8s ease;
+}
+
+.matrix-intro-fadeout {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.matrix-intro-terminal {
+  display: flex;
+  align-items: baseline;
+}
+
+.matrix-intro-text {
+  color: #00FF41;
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.3), 0 0 30px rgba(0, 255, 65, 0.1);
+  white-space: pre;
+}
+
+.matrix-intro-caret {
+  color: #00FF41;
+  font-size: 1.3rem;
+  animation: caretBlink 1s step-end infinite;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+  margin-left: 1px;
+}
+
+@keyframes caretBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.matrix-intro-skip {
+  position: absolute;
+  bottom: 32px;
+  color: #222;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.matrix-intro:hover .matrix-intro-skip {
+  color: #333;
+}
+
+/* ═══════════════════════════════
+   LOGIN — Modern Terminal
+   ═══════════════════════════════ */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #0D0D0D;
+  padding: 24px;
+}
+
+/* ═══ Panel — hidden ═══ */
+.login-panel {
+  display: none;
+}
+
+.login-panel-decoration,
+.login-form-side {
+  display: contents;
+}
+
+/* ═══ Container ═══ */
+.login-container {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ═══ ASCII Header ═══ */
+.login-ascii {
+  color: #00FF41;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  margin: 0 0 24px 0;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.12);
+}
+
+/* ═══ Mode indicator ═══ */
+.login-mode {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 0.78rem;
+}
+
+.login-mode-label {
+  color: #555;
+}
+
+.login-mode-value {
+  color: #00FF41;
+  font-weight: 600;
+}
+
+/* ═══ Error ═══ */
+.login-error {
+  padding: 8px 0;
+  color: #FF3333;
+  font-size: 0.78rem;
+  margin-bottom: 16px;
+  border-left: 2px solid #FF3333;
+  padding-left: 12px;
+}
+
+.login-error-prefix {
+  font-weight: 700;
+}
+
+.login-error p {
+  margin: 0;
+  display: inline;
+}
+
+/* ═══ Form ═══ */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-field {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid #1A1A1A;
+}
+
+.login-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+  padding: 8px 0;
+  min-width: 100px;
+}
+
+.login-field input {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  font-size: 0.85rem;
+  outline: none;
+  font-family: inherit;
+  background: transparent;
+  color: #E0E0E0;
+  caret-color: #00FF41;
+}
+
+.login-field input::placeholder {
+  color: #222;
+}
+
+.login-field input:focus {
+  color: #FFFFFF;
+}
+
+.login-field input:disabled {
+  color: #333;
+  cursor: not-allowed;
+}
+
+/* ═══ Button ═══ */
+.login-button {
+  padding: 10px;
+  background: none;
+  color: #00FF41;
+  border: 1px solid #1A1A1A;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 8px;
+  letter-spacing: 0.08em;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.login-button:hover:not(:disabled) {
+  border-color: #00FF41;
+  background-color: rgba(0, 255, 65, 0.04);
+}
+
+.login-button:disabled {
+  color: #333;
+  border-color: #111;
+  cursor: not-allowed;
+}
+
+.login-spinner {
+  color: #555;
+}
+
+/* ═══ Divider — hidden ═══ */
+.login-divider {
+  display: none;
+}
+
+/* ═══ Switch ═══ */
+.login-switch {
+  margin-top: 16px;
+}
+
+.login-switch p {
+  display: none;
+}
+
+.login-switch-button {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  transition: color 0.1s;
+}
+
+.login-switch-button:hover {
+  color: #00FF41;
+}
+
+.login-switch-button:disabled {
+  color: #222;
+  cursor: not-allowed;
+}
+
+/* ═══ Hidden legacy elements ═══ */
+.login-header,
+.login-panel-content,
+.login-panel-logo,
+.login-panel-icon,
+.login-panel-tagline,
+.login-panel-features,
+.login-panel-feature,
+.login-panel-feature-dot,
+.login-panel-wave,
+.login-panel-glow {
+  display: none;
+}
+
+/* ═══ Responsive ═══ */
+@media (max-width: 480px) {
+  .login-page {
+    padding: 20px;
+  }
+
+  .login-container {
+    max-width: 100%;
+  }
+
+  .login-field label {
+    min-width: 80px;
+    font-size: 0.72rem;
+  }
+}

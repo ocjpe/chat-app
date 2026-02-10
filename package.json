@@ -9,14 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.95.3",
+    "groq-sdk": "^0.37.0",
     "next": "16.1.6",
+    "prisma": "^6.6.0",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
-    "tailwindcss": "^4"
+    "eslint-config-next": "16.1.6"
   }
 }

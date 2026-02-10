@@ -1,0 +1,277 @@
+/* ═══════════════════════════════
+   SIDEBAR — Modern Terminal
+   ═══════════════════════════════ */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: #0D0D0D;
+}
+
+/* ═══ Sidebar ═══ */
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  height: 100vh;
+  background-color: #0A0A0A;
+  display: flex;
+  flex-direction: column;
+  color: #E0E0E0;
+  border-right: 1px solid #1A1A1A;
+}
+
+/* ═══ Header ═══ */
+.sidebar-header {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #1A1A1A;
+}
+
+.sidebar-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #00FF41;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-new-button {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 2px 4px;
+  transition: color 0.1s;
+}
+
+.sidebar-new-button:hover {
+  color: #00FF41;
+}
+
+/* ═══ Conversations ═══ */
+.sidebar-conversations {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.sidebar-conversations::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-conversations::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-conversations::-webkit-scrollbar-thumb {
+  background-color: #1A1A1A;
+}
+
+.sidebar-empty {
+  text-align: center;
+  color: #333;
+  font-size: 0.75rem;
+  padding: 20px 0;
+  margin: 0;
+}
+
+/* ═══ Conversation Item ═══ */
+.sidebar-conversation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  border-left: 2px solid transparent;
+}
+
+.sidebar-conversation:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.sidebar-conversation-active {
+  border-left-color: #00FF41;
+  background-color: rgba(0, 255, 65, 0.03);
+}
+
+.sidebar-conversation-active:hover {
+  background-color: rgba(0, 255, 65, 0.05);
+}
+
+.sidebar-conversation-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar-conversation-index {
+  font-size: 0.7rem;
+  color: #333;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.sidebar-conversation-active .sidebar-conversation-index {
+  color: #00FF41;
+}
+
+.sidebar-conversation-title {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-conversation-active .sidebar-conversation-title {
+  color: #E0E0E0;
+}
+
+.sidebar-conversation-preview {
+  display: none;
+}
+
+.sidebar-delete-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 0.68rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 1px 4px;
+  opacity: 0;
+  transition: color 0.1s, opacity 0.1s;
+  flex-shrink: 0;
+}
+
+.sidebar-conversation:hover .sidebar-delete-button {
+  opacity: 1;
+}
+
+.sidebar-delete-button:hover {
+  color: #FF3333;
+}
+
+/* ═══ Footer ═══ */
+.sidebar-footer {
+  padding: 10px 16px;
+  border-top: 1px solid #1A1A1A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sidebar-user-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 4px 0;
+  font-family: inherit;
+  flex: 1;
+  min-width: 0;
+  transition: color 0.1s;
+}
+
+.sidebar-user-button:hover {
+  color: #E0E0E0;
+}
+
+.sidebar-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  object-fit: cover;
+  border: 1px solid #1A1A1A;
+  flex-shrink: 0;
+}
+
+.sidebar-avatar-fallback {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  background-color: #1A1A1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: #00FF41;
+}
+
+.sidebar-user-name {
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-signout-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 0.68rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 2px 0;
+  transition: color 0.1s;
+  flex-shrink: 0;
+}
+
+.sidebar-signout-button:hover {
+  color: #FF3333;
+}
+
+/* ═══ Responsive ═══ */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 48px;
+    min-width: 48px;
+  }
+
+  .sidebar-title,
+  .sidebar-conversation-info,
+  .sidebar-user-name,
+  .sidebar-signout-button,
+  .sidebar-empty {
+    display: none;
+  }
+
+  .sidebar-header {
+    justify-content: center;
+    padding: 12px 6px;
+  }
+
+  .sidebar-conversation {
+    justify-content: center;
+    padding: 8px 6px;
+  }
+
+  .sidebar-delete-button {
+    display: none;
+  }
+
+  .sidebar-footer {
+    flex-direction: column;
+    padding: 8px 6px;
+  }
+
+  .sidebar-user-button {
+    justify-content: center;
+  }
+}

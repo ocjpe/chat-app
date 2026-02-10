@@ -1,157 +1,131 @@
-# chat-app
+# Chat IA
+Application de chat web avec intelligence artificielle, construite avec Next.js, SQLite et l'API Groq.
 
-# Cahier des charges – Projet Chat Web
+## Contributeurs
+Océane JOPPE
 
-## Objectif pédagogique
-L’objectif de ce projet est de permettre aux apprenants de **créer une application de chat simple**, moderne et fonctionnelle, en utilisant **Next.js**, **JavaScript** et **SQLite**.
+## Fonctionnement de l'application
 
-Le projet est volontairement simple, afin que les apprenants se concentrent sur :
-- la compréhension du lien frontend / backend
-- l’organisation d’un projet Next.js
-- l’utilisation d’une base de données locale
-- les bases d’une API web
+L'application permet à un utilisateur de discuter avec une intelligence artificielle :
 
-Aucun TypeScript n’est utilisé dans ce projet.
+1. L'utilisateur se connecte ou crée un compte via Supabase (email + mot de passe)
+2. Il écrit un message dans le champ de texte et l'envoie
+3. Le message est envoyé au serveur via l'API `/api/chat`
+4. Le serveur sauvegarde le message dans la base de données SQLite
+5. Le serveur envoie le message à l'API Groq (modèle LLama 3.3 70B) pour obtenir une réponse
+6. La réponse de l'IA est sauvegardée dans la base de données
+7. Les deux messages (utilisateur + IA) sont renvoyés au frontend et affichés à l'écran
 
-## Contexte du projet
-Vous devez développer une application web de type **chat**.
+## Technologies utilisées
 
-Le fonctionnement attendu est le suivant :
-- un utilisateur écrit un message
-- le message est envoyé au serveur
-- une réponse est générée par une intelligence artificielle
-- les messages sont enregistrés dans une base de données
-- l’historique des messages est affiché à l’écran
-
-L’application est contenue dans **un seul projet Next.js**, avec **un seul Dockerfile.**
-
-## Technologies imposées
-Les technologies suivantes doivent être utilisées :
 - **Framework** : Next.js (App Router)
-- **Langage** : JavaScript (pas de TypeScript)
+- **Langage** : JavaScript
 - **Frontend** : React
 - **Backend** : API Routes Next.js
-- **Base** de données : SQLite
-- **Accès** base de données : Prisma
+- **Base de données** : SQLite
+- **ORM** : Prisma
 - **IA** : API Groq
-- **Containerisation** : Docker (un seul Dockerfile)
+- **Authentification** : Supabase
+- **Containerisation** : Docker
 
-## Architecture du projet (obligatoire)
-La structure suivante doit être respectée.
-
-### Description des répertoires
-| Répertoire/Fichier      | Rôle                   | Description simple                                                      |
-|------------------------|------------------------|-------------------------------------------------------------------------|
-| ```frontend/```              | Interface utilisateur  | Contient tout le code React affiché à l’écran (composants, hooks, styles). |
-| ```frontend/components/```   | Composants UI          | Composants React (chat, messages, formulaire, etc.).                    |
-| ```frontend/hooks/```        | Logique frontend       | Hooks React pour gérer l’état et les appels API.                        |
-| ```frontend/styles/```       | Styles                 | Fichiers CSS pour le style de l’application.                            |
-| ```backend/```               | Logique serveur        | Contient toute la logique métier côté serveur.                          |
-| ```backend/services/```      | Services               | Fonctions métier (appel IA, sauvegarde des messages).                   |
-| ```backend/lib/```           | Outils backend         | Connexion à la base de données SQLite.                                  |
-| ```backend/prisma/```        | Base de données        | Schéma Prisma et configuration SQLite.                                  |
-| ```app/```                   | Next.js App Router     | Point d’entrée de l’application Next.js.                                |
-| ```app/api/```               | API Routes             | API accessibles via /api/*.                                             |
-| ```app/page.js```            | Page principale        | Page principale de l’application.                                       |
-| ```data/```                  | Données                | Contient le fichier de base de données SQLite.                          |
-| ```Dockerfile```             | Déploiement            | Instructions pour construire et lancer l’application avec Docker.       |
-| ```package.json```           | Dépendances            | Liste des dépendances et scripts du projet.                             |
-| ```README.md```              | Documentation          | Explication du projet et instructions de lancement.                     |
+## Structure des dossiers
 
 ```
 chat-app/
-
-chat-app/
-├── frontend/                # Interface utilisateur (React)
-│   ├── components/          
-│   ├── hooks/               
-│   └── styles/              
+├── frontend/                 # Interface utilisateur (React)
+│   ├── components/           # Composants React
+│   │   ├── Chat.js           # Composant principal du chat
+│   │   ├── LoginForm.js      # Formulaire de connexion / inscription
+│   │   ├── MessageList.js    # Affichage de la liste des messages
+│   │   └── MessageInput.js   # Champ de saisie et bouton d'envoi
+│   ├── hooks/                # Logique frontend
+│   │   ├── useChat.js        # Gestion des messages et appels API
+│   │   └── useAuth.js        # Gestion de l'authentification
+│   └── styles/               # Fichiers CSS
+│       ├── chat.css          # Styles du chat
+│       └── login.css         # Styles de la page de connexion
 │
-├── backend/                 # Logique métier serveur
-│   ├── services/            
-│   ├── lib/                 
-│   └── prisma/              
+├── backend/                  # Logique serveur
+│   ├── services/             # Fonctions métier
+│   │   ├── messageService.js # Sauvegarde et récupération des messages
+│   │   └── aiService.js      # Appel à l'API Groq
+│   ├── lib/                  # Outils et connexions
+│   │   ├── prisma.js         # Client Prisma (SQLite)
+│   │   ├── supabase-browser.js # Client Supabase côté navigateur
+│   │   └── supabase-server.js  # Client Supabase côté serveur
+│   └── prisma/               # Configuration base de données
+│       └── schema.prisma     # Schéma Prisma (modèle Message)
 │
-├── app/                     # Next.js App Router
-│   ├── api/                 
-│   ├── page.js              
-│   └── layout.js           
+├── app/                      # Next.js App Router
+│   ├── api/chat/             # Route API
+│   │   └── route.js          # GET (historique) et POST (envoi + réponse IA)
+│   ├── page.js               # Page principale (login ou chat)
+│   ├── layout.js             # Layout racine
+│   └── globals.css           # Styles globaux
 │
-├── data/                    # Base de données SQLite
-│   └── app.db               
+├── data/                     # Base de données SQLite
+│   └── app.db
 │
-├── Dockerfile               
-├── package.json             
-└── README.md                
+├── Dockerfile                # Configuration Docker
+├── package.json              # Dépendances et scripts
+└── README.md                 # Ce fichier
 ```
 
-## Fonctionnalités attendues
+## Prérequis
 
-### 1. Interface utilisateur
-L’interface doit permettre :
-- d’écrire un message dans un champ texte
-- d’envoyer le message via un bouton
-- d’afficher la liste des messages (utilisateur et IA)
+- Node.js 20+
+- Un compte [Groq](https://console.groq.com/) pour obtenir une clé API
+- Un projet [Supabase](https://supabase.com/) pour l'authentification
 
-L’interface doit rester simple et lisible.
+## Installation et lancement
 
-### 2. Envoi d’un message
-Lorsqu’un utilisateur envoie un message :
-- le frontend appelle une route API (```/api/chat```)
-- le backend reçoit le message
-- le message est vérifié (non vide)
-- le message est enregistré dans SQLite  
+### 1. Cloner le projet
 
-### 3. Réponse de l’IA
-Le backend doit :
-- envoyer le message à l’API Groq
-- recevoir la réponse
-- enregistrer la réponse dans SQLite
-- renvoyer la réponse au frontend 
+```bash
+git clone <url-du-repo>
+cd chat-app
+```
 
-### 4. Base de données
-La base de données SQLite doit contenir au minimum :
-- le contenu du message
-- le rôle du message (```user``` ou ```assistant```)
-- la date de création
+### 2. Installer les dépendances
 
-## Règles de développement
-Les règles suivantes doivent être respectées :
-- JavaScript uniquement (pas de TypeScript)
-- séparation claire entre frontend et backend
-- le frontend ne doit jamais accéder directement à la base de données
-- toutes les requêtes passent par ```/api/*```
-- code lisible et correctement indenté
-- noms de fichiers simples et explicites
+```bash
+npm install
+```
 
-## Contraintes techniques
-- un seul projet Next.js
-- un seul Dockerfile
-- pas de base de données externe
-- pas d’authentification
-- pas de fonctionnalités inutiles
+### 3. Configurer les variables d'environnement
 
-## Livrables attendus
-Les apprenants doivent fournir :
-- le code source du projet
-- un fichier ```README.md``` contenant :
-    - les instructions pour lancer le projet
-    - une explication de la structure des dossiers
-    - une description du fonctionnement de l’application
+Créer un fichier `.env` à la racine du projet :
 
-## Critères d’évaluation
-Le projet sera évalué selon :
-- le respect du cahier des charges
-- le bon fonctionnement du chat
-- la clarté de l’architecture
-- la lisibilité du code JavaScript
-- la qualité du README
+```
+DATABASE_URL="file:../../data/app.db"
+GROQ_API_KEY=votre-cle-api-groq
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=votre-cle-anon-supabase
+```
 
-## Objectif final
-À la fin du projet, les apprenants doivent être capables de :
-- créer une application Next.js en JavaScript
-- comprendre le rôle des API Routes
-- utiliser une base de données SQLite
-- organiser un projet web correctement
+- **GROQ_API_KEY** : disponible sur [console.groq.com](https://console.groq.com/) > API Keys
+- **NEXT_PUBLIC_SUPABASE_URL** et **NEXT_PUBLIC_SUPABASE_ANON_KEY** : disponibles sur le dashboard Supabase > Settings > API
 
-**Ce cahier des charges est volontairement simple et pédagogique.** L’objectif n’est pas la performance, mais la compréhension.
+### 4. Initialiser la base de données
+
+```bash
+npx prisma generate --schema=backend/prisma/schema.prisma
+npx prisma db push --schema=backend/prisma/schema.prisma
+```
+
+### 5. Lancer le serveur de développement
+
+```bash
+npm run dev
+```
+
+L'application est accessible sur [http://localhost:3000](http://localhost:3000).
+
+## Lancement avec Docker
+
+```bash
+docker build -t chat-app .
+docker run -p 3000:3000 chat-app
+```
+
+L'application est accessible sur [http://localhost:3000](http://localhost:3000).

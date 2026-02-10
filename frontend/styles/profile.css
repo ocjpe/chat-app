@@ -1,0 +1,260 @@
+/* ═══════════════════════════════
+   PROFILE — Modern Terminal
+   ═══════════════════════════════ */
+.profile-page {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  background-color: #0D0D0D;
+}
+
+.profile-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 24px 0;
+}
+
+/* ═══ Header ═══ */
+.profile-header {
+  margin-bottom: 24px;
+}
+
+.profile-back-button {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 12px;
+  display: inline-block;
+  font-family: inherit;
+  transition: color 0.1s;
+}
+
+.profile-back-button:hover {
+  color: #00FF41;
+}
+
+.profile-header h1 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #00FF41;
+  margin: 0;
+}
+
+/* ═══ Messages ═══ */
+.profile-error {
+  padding: 8px 0 8px 12px;
+  color: #FF3333;
+  border-left: 2px solid #FF3333;
+  font-size: 0.78rem;
+  margin-bottom: 16px;
+}
+
+.profile-error p {
+  margin: 0;
+  display: inline;
+}
+
+.profile-success {
+  padding: 8px 0 8px 12px;
+  color: #00FF41;
+  border-left: 2px solid #00FF41;
+  font-size: 0.78rem;
+  margin-bottom: 16px;
+}
+
+.profile-success p {
+  margin: 0;
+  display: inline;
+}
+
+/* ═══ Avatar ═══ */
+.profile-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #1A1A1A;
+}
+
+.profile-avatar-upload {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+  border: 1px solid #1A1A1A;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background: none;
+  margin-bottom: 8px;
+  transition: border-color 0.15s;
+}
+
+.profile-avatar-upload:hover {
+  border-color: #00FF41;
+}
+
+.profile-avatar-upload:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.profile-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-avatar-circle {
+  width: 100%;
+  height: 100%;
+  background-color: #1A1A1A;
+  color: #00FF41;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.profile-avatar-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #888;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 4px 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.profile-avatar-upload:hover .profile-avatar-overlay {
+  opacity: 1;
+}
+
+.profile-avatar-input {
+  display: none;
+}
+
+.profile-avatar-email {
+  font-size: 0.75rem;
+  color: #555;
+  margin: 0;
+}
+
+.profile-avatar-hint {
+  display: none;
+}
+
+/* ═══ Form ═══ */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-section h2 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #555;
+  margin: 0 0 12px 0;
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.profile-field {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid #1A1A1A;
+}
+
+.profile-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+  padding: 8px 0;
+  min-width: 90px;
+}
+
+.profile-field input {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  font-size: 0.85rem;
+  outline: none;
+  font-family: inherit;
+  background: transparent;
+  color: #E0E0E0;
+  caret-color: #00FF41;
+}
+
+.profile-field input::placeholder {
+  color: #222;
+}
+
+.profile-field input:focus {
+  color: #FFFFFF;
+}
+
+.profile-field input:disabled {
+  color: #333;
+  cursor: not-allowed;
+}
+
+.profile-field-hint {
+  display: none;
+}
+
+/* ═══ Save ═══ */
+.profile-save-button {
+  padding: 10px;
+  background: none;
+  color: #00FF41;
+  border: 1px solid #1A1A1A;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.08em;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.profile-save-button:hover:not(:disabled) {
+  border-color: #00FF41;
+  background-color: rgba(0, 255, 65, 0.04);
+}
+
+.profile-save-button:disabled {
+  color: #333;
+  border-color: #111;
+  cursor: not-allowed;
+}
+
+/* ═══ Responsive ═══ */
+@media (max-width: 580px) {
+  .profile-page {
+    padding: 16px;
+  }
+
+  .profile-field label {
+    min-width: 70px;
+    font-size: 0.72rem;
+  }
+}
