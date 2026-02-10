@@ -1,8 +1,19 @@
 import Groq from "groq-sdk";
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+/**
+ * Client Groq — initialisé paresseusement pour éviter
+ * un crash au build quand GROQ_API_KEY n'est pas encore défini.
+ */
+let groq;
+
+function getGroqClient() {
+  if (!groq) {
+    groq = new Groq({
+      apiKey: process.env.GROQ_API_KEY,
+    });
+  }
+  return groq;
+}
 
 /**
  * Envoie un message à l'API Groq et retourne la réponse de l'IA.
@@ -10,7 +21,7 @@ const groq = new Groq({
  * @returns {Promise<string>} La réponse de l'IA.
  */
 export async function getAIResponse(messages) {
-  const chatCompletion = await groq.chat.completions.create({
+  const chatCompletion = await getGroqClient().chat.completions.create({
     messages: [
       {
         role: "system",
